@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json.schemastore.org/design-tokens.json",
+  "name": "Forge Brand Skin",
+  "version": "1.0.0",
+  "colors": {
+    "dark": "#141413",
+    "light": "#faf9f5",
+    "midGray": "#b0aea5",
+    "lightGray": "#e8e6dc",
+    "accentOrange": "#d97757",
+    "accentBlue": "#6a9bcc",
+    "accentGreen": "#788c5d"
+  },
+  "typography": {
+    "heading": "Poppins, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+    "body": "Lora, Georgia, serif",
+    "mono": "'JetBrains Mono', 'Fira Code', Consolas, monospace"
+  },
+  "hierarchy": {
+    "ideChrome": "subhash-uiux",
+    "homeDashboard": "brand-skin",
+    "splash": "brand-skin",
+    "generativeArt": "brand-skin"
+  }
+}
