@@ -1,21 +1,35 @@
-import React from 'react';
-import { Flame, FolderPlus, FolderOpen, LayoutTemplate, Clock, ArrowRight, Sparkles, Terminal } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Flame, FolderPlus, FolderOpen, FileUp, Clock, ArrowRight, Folder } from 'lucide-react';
 
 export interface HomeDashboardProps {
-  onOpenProject: (path: string) => void;
+  onOpenFolder: () => void;
+  onOpenFile: () => void;
+  onOpenRecent: (path: string) => void;
   onNewProject: () => void;
+  recentWorkspaces?: string[];
 }
 
 export const HomeDashboard: React.FC<HomeDashboardProps> = ({
-  onOpenProject,
+  onOpenFolder,
+  onOpenFile,
+  onOpenRecent,
   onNewProject,
+  recentWorkspaces: propRecents,
 }) => {
-  const recentProjects = [
-    { name: 'ai-web-app', path: '~/projects/ai-web-app', updated: '2h ago', badge: 'AI', color: 'bg-accent-blue/15 text-accent-blue' },
-    { name: 'portfolio-site', path: '~/projects/portfolio-site', updated: '5h ago', badge: 'P', color: 'bg-accent/15 text-accent' },
-    { name: 'mobile-app', path: '~/projects/mobile-app', updated: '1d ago', badge: 'M', color: 'bg-emerald-500/15 text-emerald-500' },
-    { name: 'ecommerce', path: '~/projects/ecommerce', updated: '2d ago', badge: 'E', color: 'bg-purple-500/15 text-purple-400' },
-  ];
+  const [recents, setRecents] = useState<string[]>(propRecents || []);
+
+  useEffect(() => {
+    if (!propRecents) {
+      const forgeAPI = (window as any).forgeAPI;
+      if (forgeAPI?.fs?.getRecentWorkspaces) {
+        forgeAPI.fs.getRecentWorkspaces().then((list: string[]) => {
+          if (Array.isArray(list)) setRecents(list);
+        });
+      }
+    } else {
+      setRecents(propRecents);
+    }
+  }, [propRecents]);
 
   return (
     <div className="flex-1 h-full w-full bg-bg overflow-y-auto p-8 select-none">
@@ -29,35 +43,45 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({
             <span className="text-xs font-bold uppercase tracking-wider text-text-muted">Forge Desktop</span>
           </div>
           <h1 className="text-2xl font-bold text-text tracking-tight font-sans">
-            Welcome back, Developer
+            Welcome to Forge
           </h1>
           <p className="text-xs text-text-muted">
-            Your local AI-powered development environment. Zero cloud dependencies, zero telemetry.
+            Production-grade, local-first AI Desktop IDE. Open a workspace or file to begin.
           </p>
         </div>
 
-        {/* Quick Stats Row */}
-        <div className="grid grid-cols-3 gap-4">
-          <div className="p-3.5 rounded-lg border border-border bg-surface flex flex-col gap-1">
-            <span className="text-[11px] text-text-muted font-medium">Recent Projects</span>
-            <span className="text-xl font-bold text-text">4 Total</span>
-          </div>
-          <div className="p-3.5 rounded-lg border border-border bg-surface flex flex-col gap-1">
-            <span className="text-[11px] text-text-muted font-medium">Pending Actions</span>
-            <span className="text-xl font-bold text-emerald-500">0 Tasks</span>
-          </div>
-          <div className="p-3.5 rounded-lg border border-border bg-surface flex flex-col gap-1">
-            <span className="text-[11px] text-text-muted font-medium">Local Runtime</span>
-            <span className="text-xl font-bold text-accent">Ollama 0.40.4</span>
-          </div>
-        </div>
-
-        {/* Quick Start Cards */}
+        {/* Quick Start Action Cards */}
         <div className="flex flex-col gap-2">
           <span className="text-xs font-bold uppercase tracking-wider text-text-muted">
             Quick Start
           </span>
           <div className="grid grid-cols-3 gap-3">
+            <div
+              onClick={onOpenFolder}
+              className="p-4 rounded-lg border border-border bg-surface hover:border-accent/60 hover:bg-surface-hover/50 transition-all cursor-pointer flex flex-col gap-2"
+            >
+              <div className="w-8 h-8 rounded-md bg-accent-blue/10 text-accent-blue flex items-center justify-center">
+                <FolderOpen className="w-4 h-4" />
+              </div>
+              <div>
+                <h4 className="text-xs font-semibold text-text">Open Folder</h4>
+                <p className="text-[11px] text-text-muted mt-0.5">Open a local project directory</p>
+              </div>
+            </div>
+
+            <div
+              onClick={onOpenFile}
+              className="p-4 rounded-lg border border-border bg-surface hover:border-accent/60 hover:bg-surface-hover/50 transition-all cursor-pointer flex flex-col gap-2"
+            >
+              <div className="w-8 h-8 rounded-md bg-emerald-500/10 text-emerald-500 flex items-center justify-center">
+                <FileUp className="w-4 h-4" />
+              </div>
+              <div>
+                <h4 className="text-xs font-semibold text-text">Open File</h4>
+                <p className="text-[11px] text-text-muted mt-0.5">Open any single code file</p>
+              </div>
+            </div>
+
             <div
               onClick={onNewProject}
               className="p-4 rounded-lg border border-border bg-surface hover:border-accent/60 hover:bg-surface-hover/50 transition-all cursor-pointer flex flex-col gap-2"
@@ -66,73 +90,54 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({
                 <FolderPlus className="w-4 h-4" />
               </div>
               <div>
-                <h4 className="text-xs font-semibold text-text">New Project</h4>
-                <p className="text-[11px] text-text-muted mt-0.5">Scaffold with Vite & React</p>
-              </div>
-            </div>
-
-            <div
-              onClick={() => onOpenProject('d:/don\'t_know/forge')}
-              className="p-4 rounded-lg border border-border bg-surface hover:border-accent/60 hover:bg-surface-hover/50 transition-all cursor-pointer flex flex-col gap-2"
-            >
-              <div className="w-8 h-8 rounded-md bg-accent-blue/10 text-accent-blue flex items-center justify-center">
-                <FolderOpen className="w-4 h-4" />
-              </div>
-              <div>
-                <h4 className="text-xs font-semibold text-text">Open Folder</h4>
-                <p className="text-[11px] text-text-muted mt-0.5">Open local directory</p>
-              </div>
-            </div>
-
-            <div
-              className="p-4 rounded-lg border border-border bg-surface hover:border-accent/60 hover:bg-surface-hover/50 transition-all cursor-pointer flex flex-col gap-2"
-            >
-              <div className="w-8 h-8 rounded-md bg-emerald-500/10 text-emerald-500 flex items-center justify-center">
-                <LayoutTemplate className="w-4 h-4" />
-              </div>
-              <div>
-                <h4 className="text-xs font-semibold text-text">View Templates</h4>
-                <p className="text-[11px] text-text-muted mt-0.5">AI Agents, Fullstack, REA</p>
+                <h4 className="text-xs font-semibold text-text">Create New Project</h4>
+                <p className="text-[11px] text-text-muted mt-0.5">Scaffold a new file or directory</p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Recent Projects Table */}
+        {/* Recent Workspaces Table (Real persisted history) */}
         <div className="flex flex-col gap-2">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold uppercase tracking-wider text-text-muted">
               Recent Workspaces
             </span>
-            <span className="text-[11px] text-accent hover:underline cursor-pointer">View All →</span>
           </div>
 
-          <div className="flex flex-col divide-y divide-border border border-border rounded-lg bg-surface overflow-hidden">
-            {recentProjects.map((proj) => (
-              <div
-                key={proj.name}
-                onClick={() => onOpenProject(proj.path)}
-                className="flex items-center justify-between p-3 hover:bg-surface-hover cursor-pointer transition-colors"
-              >
-                <div className="flex items-center gap-3">
-                  <div className={`w-7 h-7 rounded flex items-center justify-center font-bold text-xs ${proj.color}`}>
-                    {proj.badge}
+          {recents.length === 0 ? (
+            <div className="p-6 rounded-lg border border-border bg-surface text-center text-xs text-text-muted flex flex-col items-center justify-center gap-1.5">
+              <Folder className="w-6 h-6 opacity-30 text-text-muted" />
+              <span>No recent workspaces found.</span>
+              <span className="text-[11px]">Open a folder above to start working.</span>
+            </div>
+          ) : (
+            <div className="flex flex-col divide-y divide-border border border-border rounded-lg bg-surface overflow-hidden">
+              {recents.map((folderPath) => {
+                const folderName = folderPath.split(/[/\\]/).pop() || folderPath;
+                return (
+                  <div
+                    key={folderPath}
+                    onClick={() => onOpenRecent(folderPath)}
+                    className="flex items-center justify-between p-3 hover:bg-surface-hover cursor-pointer transition-colors"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-7 h-7 rounded bg-accent/10 text-accent flex items-center justify-center font-bold text-xs">
+                        <Folder className="w-3.5 h-3.5" />
+                      </div>
+                      <div>
+                        <h5 className="text-xs font-semibold text-text">{folderName}</h5>
+                        <span className="font-mono text-[10px] text-text-muted">{folderPath}</span>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-4 text-xs text-text-muted">
+                      <ArrowRight className="w-3.5 h-3.5 text-text-muted/60" />
+                    </div>
                   </div>
-                  <div>
-                    <h5 className="text-xs font-semibold text-text">{proj.name}</h5>
-                    <span className="font-mono text-[10px] text-text-muted">{proj.path}</span>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4 text-xs text-text-muted">
-                  <div className="flex items-center gap-1 text-[11px]">
-                    <Clock className="w-3 h-3" />
-                    <span>{proj.updated}</span>
-                  </div>
-                  <ArrowRight className="w-3.5 h-3.5 text-text-muted/60" />
-                </div>
-              </div>
-            ))}
-          </div>
+                );
+              })}
+            </div>
+          )}
         </div>
       </div>
     </div>

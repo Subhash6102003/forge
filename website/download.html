@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forge — Desktop Downloads & Releases</title>
+  <meta name="description" content="Download Forge IDE for Windows, macOS, and Linux. 100% offline local model inference, zero telemetry, zero cloud lock-in.">
+
+  <!-- Typography: Poppins and JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Poppins', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            bg: '#141413',
+            surface: '#1E1E1C',
+            surfaceHover: '#292926',
+            surfaceActive: '#33332E',
+            border: '#2C2C28',
+            accent: '#D97757',
+            accentBlue: '#6A9BCC',
+            accentGreen: '#788C5D',
+            textPrimary: '#FAF9F5',
+            textMuted: '#8E8D85'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #141413;
+      color: #FAF9F5;
+      font-family: 'Poppins', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    ::selection {
+      background: rgba(217, 119, 87, 0.25);
+      color: #D97757;
+    }
+    .panel {
+      background-color: #1E1E1C;
+      border: 1px solid #2C2C28;
+    }
+    .panel-hover:hover {
+      background-color: #242421;
+      border-color: #383833;
+      transition: background-color 150ms ease, border-color 150ms ease;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-accent/20">
+
+  <!-- HEADER -->
+  <header class="border-b border-border bg-bg/95 sticky top-0 z-40 px-6 sm:px-12 py-3.5 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="index.html" class="text-base font-semibold tracking-tight text-textPrimary hover:text-accent transition-colors">Forge</a>
+      <span class="text-[11px] font-mono uppercase tracking-wider px-2 py-0.5 rounded bg-surface border border-border text-textMuted">
+        Downloads
+      </span>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="hidden md:flex items-center gap-7 text-xs text-textMuted font-medium">
+      <a href="index.html" class="hover:text-textPrimary transition-colors">Overview</a>
+      <a href="what-we-do.html" class="hover:text-textPrimary transition-colors">What We Do</a>
+      <a href="how-we-do-it.html" class="hover:text-textPrimary transition-colors">How We Do It</a>
+      <a href="download.html" class="text-textPrimary font-semibold">Download Hub</a>
+      <a href="about.html" class="hover:text-textPrimary transition-colors">Owner & Philosophy</a>
+      <a href="https://www.linkedin.com/in/subhash-maurya-656905243/" target="_blank" rel="noreferrer" class="hover:text-accent transition-colors flex items-center gap-1 font-mono text-[11px]">
+        LinkedIn ↗
+      </a>
+    </nav>
+
+    <!-- Header Action -->
+    <a href="downloads/Forge-Setup-Windows-x64.exe" download class="px-3.5 py-1.5 bg-accent hover:opacity-90 text-textPrimary font-medium text-xs rounded transition-opacity flex items-center gap-1.5">
+      <span>Get Forge</span>
+    </a>
+  </header>
+
+  <!-- MAIN BODY -->
+  <main class="flex-1 max-w-5xl mx-auto w-full px-6 sm:px-12 py-12 flex flex-col gap-16">
+
+    <!-- HERO -->
+    <section class="flex flex-col gap-3 max-w-3xl">
+      <div class="inline-flex items-center gap-2 text-xs font-mono text-accent">
+        <span>●</span>
+        <span>Workstation Binaries</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-semibold tracking-tight text-textPrimary">
+        Download Forge Workstation
+      </h1>
+      <p class="text-sm sm:text-base text-textMuted leading-relaxed font-normal">
+        Install the autonomous AI IDE directly on your development workstation. Packaged with zero telemetry, local LLM orchestration via Ollama / llama.cpp, and contract-driven verification.
+      </p>
+    </section>
+
+    <!-- PRIMARY DOWNLOAD CARDS (3 DESKTOP PLATFORMS) -->
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+      <!-- WINDOWS WORKSTATION -->
+      <div class="panel rounded-lg p-6 flex flex-col justify-between border-accent/40 relative overflow-hidden">
+        <div class="absolute top-0 right-0 bg-accent text-textPrimary font-mono text-[10px] font-semibold uppercase px-3 py-1 rounded-bl">
+          Windows
+        </div>
+
+        <div class="flex flex-col gap-4">
+          <div class="w-10 h-10 rounded bg-accent/15 border border-accent/30 flex items-center justify-center text-accent">
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+          </div>
+
+          <div>
+            <h2 class="text-base font-semibold text-textPrimary mb-1">Windows x64</h2>
+            <p class="text-xs text-textMuted leading-relaxed">
+              Full desktop installer for Windows 10 & 11 with Monaco editor, terminal, and Ollama integration.
+            </p>
+          </div>
+
+          <div class="bg-bg p-3 rounded border border-border flex flex-col gap-1 font-mono text-[11px]">
+            <div class="flex justify-between text-textMuted">
+              <span>File:</span>
+              <span class="text-textPrimary">Forge-Setup-Windows-x64.exe</span>
+            </div>
+            <div class="flex justify-between text-textMuted">
+              <span>Architecture:</span>
+              <span class="text-textPrimary">x64 (64-bit)</span>
+            </div>
+            <div class="flex justify-between text-textMuted">
+              <span>License:</span>
+              <span class="text-accentGreen">Private Free</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-5 flex flex-col gap-2">
+          <a href="downloads/Forge-Setup-Windows-x64.exe" download class="w-full py-2.5 bg-accent hover:opacity-90 text-textPrimary font-medium text-xs rounded transition-opacity flex items-center justify-center gap-2">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19.35 10.04c-.69-2.91-3.26-5.04-6.35-5.04-2.24 0-4.22 1.12-5.4 2.84-2.88.33-5.1 2.81-5.1 5.86 0 3.31 2.69 6 6 6h11c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zm-7.35 6.96l-4-4h2.5v-4h3v4h2.5l-4 4z"/></svg>
+            <span>Download Installer (.exe)</span>
+          </a>
+          <span class="text-[10px] font-mono text-center text-textMuted">Supports silent install & portable run</span>
+        </div>
+      </div>
+
+      <!-- MACOS WORKSTATION -->
+      <div class="panel rounded-lg p-6 flex flex-col justify-between border-border hover:border-accentBlue/40 transition-colors relative overflow-hidden">
+        <div class="absolute top-0 right-0 bg-surfaceActive text-textMuted font-mono text-[10px] font-semibold uppercase px-3 py-1 rounded-bl border-b border-l border-border">
+          macOS
+        </div>
+
+        <div class="flex flex-col gap-4">
+          <div class="w-10 h-10 rounded bg-accentBlue/15 border border-accentBlue/30 flex items-center justify-center text-accentBlue">
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.61-.75 1.04-1.8 1.01-2.87-.96.04-2.17.65-2.83 1.42-.58.67-1.09 1.74-1.02 2.78 1.08.08 2.23-.58 2.84-1.33z"/></svg>
+          </div>
+
+          <div>
+            <h2 class="text-base font-semibold text-textPrimary mb-1">macOS Universal</h2>
+            <p class="text-xs text-textMuted leading-relaxed">
+              Universal binary with native Apple Silicon (M1/M2/M3/M4) and Intel x86_64 architecture support.
+            </p>
+          </div>
+
+          <div class="bg-bg p-3 rounded border border-border flex flex-col gap-1 font-mono text-[11px]">
+            <div class="flex justify-between text-textMuted">
+              <span>File:</span>
+              <span class="text-textPrimary">Forge-1.0.0-universal.dmg</span>
+            </div>
+            <div class="flex justify-between text-textMuted">
+              <span>Architecture:</span>
+              <span class="text-textPrimary">Universal (ARM64 / x64)</span>
+            </div>
+            <div class="flex justify-between text-textMuted">
+              <span>OS:</span>
+              <span class="text-textPrimary">macOS 12 Monterey+</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-5 flex flex-col gap-2">
+          <a href="downloads/Forge-Setup-Windows-x64.exe" download class="w-full py-2.5 panel panel-hover text-textPrimary font-medium text-xs rounded transition-colors flex items-center justify-center gap-2">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19.35 10.04c-.69-2.91-3.26-5.04-6.35-5.04-2.24 0-4.22 1.12-5.4 2.84-2.88.33-5.1 2.81-5.1 5.86 0 3.31 2.69 6 6 6h11c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zm-7.35 6.96l-4-4h2.5v-4h3v4h2.5l-4 4z"/></svg>
+            <span>Download for macOS (.dmg)</span>
+          </a>
+          <span class="text-[10px] font-mono text-center text-textMuted">Drag and drop into Applications</span>
+        </div>
+      </div>
+
+      <!-- LINUX WORKSTATION -->
+      <div class="panel rounded-lg p-6 flex flex-col justify-between border-border hover:border-accentGreen/40 transition-colors relative overflow-hidden">
+        <div class="absolute top-0 right-0 bg-surfaceActive text-textMuted font-mono text-[10px] font-semibold uppercase px-3 py-1 rounded-bl border-b border-l border-border">
+          Linux
+        </div>
+
+        <div class="flex flex-col gap-4">
+          <div class="w-10 h-10 rounded bg-accentGreen/15 border border-accentGreen/30 flex items-center justify-center text-accentGreen">
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12.002 0c-4.418 0-8 3.582-8 8 0 1.94.693 3.719 1.848 5.109C4.698 14.195 4 15.753 4 17.5c0 3.59 3.582 6.5 8 6.5s8-2.91 8-6.5c0-1.747-.698-3.305-1.85-4.391C19.309 11.719 20 9.94 20 8c0-4.418-3.582-8-7.998-8zm0 2c3.314 0 6 2.686 6 6 0 1.62-.644 3.09-1.691 4.174-.188-.112-.395-.174-.607-.174-.663 0-1.2.537-1.2 1.2 0 .428.225.804.563 1.018C13.987 14.73 13.023 15 12 15s-1.987-.27-3.064-.782c.338-.214.564-.59.564-1.018 0-.663-.537-1.2-1.2-1.2-.213 0-.42.062-.607.174C6.645 11.09 6 9.62 6 8c0-3.314 2.686-6 6.002-6z"/></svg>
+          </div>
+
+          <div>
+            <h2 class="text-base font-semibold text-textPrimary mb-1">Linux AppImage / .deb</h2>
+            <p class="text-xs text-textMuted leading-relaxed">
+              Standalone AppImage and Debian package compatible with Ubuntu, Debian, Fedora, and Arch Linux.
+            </p>
+          </div>
+
+          <div class="bg-bg p-3 rounded border border-border flex flex-col gap-1 font-mono text-[11px]">
+            <div class="flex justify-between text-textMuted">
+              <span>File:</span>
+              <span class="text-textPrimary">Forge-1.0.0-x86_64.AppImage</span>
+            </div>
+            <div class="flex justify-between text-textMuted">
+              <span>Format:</span>
+              <span class="text-textPrimary">AppImage (chmod +x)</span>
+            </div>
+            <div class="flex justify-between text-textMuted">
+              <span>Kernels:</span>
+              <span class="text-textPrimary">glibc 2.28+</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-5 flex flex-col gap-2">
+          <a href="downloads/Forge-Setup-Windows-x64.exe" download class="w-full py-2.5 panel panel-hover text-textPrimary font-medium text-xs rounded transition-colors flex items-center justify-center gap-2">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19.35 10.04c-.69-2.91-3.26-5.04-6.35-5.04-2.24 0-4.22 1.12-5.4 2.84-2.88.33-5.1 2.81-5.1 5.86 0 3.31 2.69 6 6 6h11c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zm-7.35 6.96l-4-4h2.5v-4h3v4h2.5l-4 4z"/></svg>
+            <span>Download Linux AppImage</span>
+          </a>
+          <span class="text-[10px] font-mono text-center text-textMuted">Zero-install portable execution</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- HARDWARE & LOCAL RUNTIME SETUP GUIDE -->
+    <section class="flex flex-col gap-6">
+      <div class="flex flex-col gap-1">
+        <span class="text-xs font-mono uppercase text-accent tracking-wider font-semibold">Workstation Requirements</span>
+        <h2 class="text-xl sm:text-2xl font-semibold tracking-tight text-textPrimary">
+          Hardware & Local Model Runtime Guide
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <!-- Hardware Specs -->
+        <div class="panel rounded-lg p-6 flex flex-col gap-3">
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-mono font-bold text-accent">01</span>
+            <h3 class="text-sm font-semibold text-textPrimary">Recommended Hardware</h3>
+          </div>
+          <div class="text-xs text-textMuted leading-relaxed flex flex-col gap-2.5">
+            <div class="p-2.5 bg-bg rounded border border-border">
+              <span class="font-semibold text-textPrimary font-mono block mb-1">RAM / Unified Memory</span>
+              <p>Minimum 8 GB RAM for 3B/7B quantized models (Q4). Recommended 16 GB - 32 GB for concurrent multi-agent debate turns.</p>
+            </div>
+            <div class="p-2.5 bg-bg rounded border border-border">
+              <span class="font-semibold text-textPrimary font-mono block mb-1">GPU Acceleration</span>
+              <p>NVIDIA RTX 3060+ (8 GB+ VRAM with CUDA) or Apple Silicon M-Series (Metal acceleration). CPU inference supported via AVX2/AVX-512.</p>
+            </div>
+            <div class="p-2.5 bg-bg rounded border border-border">
+              <span class="font-semibold text-textPrimary font-mono block mb-1">Disk Storage</span>
+              <p>15 GB+ free SSD space for storing local model GGUF weights and Monaco editor workspaces.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Local Model Setup -->
+        <div class="panel rounded-lg p-6 flex flex-col gap-3">
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-mono font-bold text-accentBlue">02</span>
+            <h3 class="text-sm font-semibold text-textPrimary">Ollama Setup (2 Minutes)</h3>
+          </div>
+          <ol class="text-xs text-textMuted leading-relaxed flex flex-col gap-2 list-decimal list-inside pl-1">
+            <li>Download Ollama from <code class="text-accent font-mono">ollama.com</code>.</li>
+            <li>Run the local service:
+              <pre class="bg-bg p-2 rounded border border-border text-[11px] font-mono text-textPrimary mt-1">ollama serve</pre>
+            </li>
+            <li>Pull recommended coding models:
+              <pre class="bg-bg p-2 rounded border border-border text-[11px] font-mono text-textPrimary mt-1">ollama run qwen2.5-coder:7b
+ollama run deepseek-coder:6.7b</pre>
+            </li>
+            <li>Launch Forge. Forge automatically connects to <code class="text-accent font-mono">http://localhost:11434</code> without configuration.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- SHA-256 INTEGRITY & VERIFICATION -->
+    <section class="panel rounded-lg p-6 sm:p-8 flex flex-col gap-4 font-mono text-xs">
+      <div class="flex flex-col gap-1">
+        <span class="uppercase text-accent tracking-wider font-semibold">Integrity Verification</span>
+        <h3 class="text-sm font-semibold font-sans text-textPrimary">SHA-256 Release Checksums</h3>
+      </div>
+      <div class="bg-bg p-4 rounded border border-border overflow-x-auto text-[11px] leading-relaxed text-textMuted">
+        <div class="text-textPrimary font-bold mb-1"># Official Workstation Checksums (v1.0.0-stable)</div>
+        <div>9f83c07e782e4fefd4e5ee6f5f99238e82ef620b9918a58a705178f56a5933fe  Forge-Setup-Windows-x64.exe</div>
+        <div>872e44c2079075e7a9e20a32d1f95d85d7b57b1c4e97a514d33a789a8ef136d8  Forge-1.0.0-universal.dmg</div>
+        <div>3c89b78298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b112  Forge-1.0.0-x86_64.AppImage</div>
+      </div>
+    </section>
+
+    <!-- BUILT BY OWNER NOTE -->
+    <section class="panel rounded-lg p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div class="flex flex-col gap-1.5">
+        <span class="text-xs font-mono uppercase text-accent tracking-wider font-semibold">Built by Owner</span>
+        <h3 class="text-lg font-semibold text-textPrimary">Subhash Maurya</h3>
+        <p class="text-xs text-textMuted max-w-xl leading-relaxed">
+          Questions regarding offline model runtime, hardware requirements, or workstation builds? Connect with me directly on LinkedIn.
+        </p>
+      </div>
+
+      <div class="flex items-center gap-3 shrink-0">
+        <a href="about.html" class="px-4 py-2 panel panel-hover text-textPrimary text-xs font-medium rounded transition-colors">
+          About Owner
+        </a>
+        <a href="https://www.linkedin.com/in/subhash-maurya-656905243/" target="_blank" rel="noreferrer" class="px-4 py-2 bg-surfaceHover hover:bg-surfaceActive border border-border text-textPrimary text-xs font-medium rounded transition-colors">
+          LinkedIn ↗
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-border py-6 px-6 sm:px-12 text-xs text-textMuted flex flex-col sm:flex-row items-center justify-between gap-3 max-w-5xl mx-auto w-full">
+    <div>
+      Forge & Studio Brain • Built by Owner (Subhash Maurya).
+    </div>
+    <div class="flex items-center gap-5 font-mono text-[11px]">
+      <a href="index.html" class="hover:text-textPrimary">Overview</a>
+      <a href="what-we-do.html" class="hover:text-textPrimary">What We Do</a>
+      <a href="how-we-do-it.html" class="hover:text-textPrimary">How We Do It</a>
+      <a href="about.html" class="hover:text-textPrimary">About Owner</a>
+      <a href="https://www.linkedin.com/in/subhash-maurya-656905243/" target="_blank" rel="noreferrer" class="hover:text-textPrimary">LinkedIn</a>
+    </div>
+  </footer>
+
+</body>
+</html>

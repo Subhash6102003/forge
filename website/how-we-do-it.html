@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How We Do It — Engineering Methodology & Multi-Brain Debate</title>
+  <meta name="description" content="How We Do It: Multi-brain local debate, contract-driven Task Briefs, Tiers 0-3 scalability, and mandatory quality gates.">
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Poppins', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            bg: '#141413',
+            surface: '#1E1E1C',
+            surfaceHover: '#292926',
+            surfaceActive: '#33332E',
+            border: '#2C2C28',
+            accent: '#D97757',
+            accentBlue: '#6A9BCC',
+            accentGreen: '#788C5D',
+            textPrimary: '#FAF9F5',
+            textMuted: '#8E8D85'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #141413;
+      color: #FAF9F5;
+      font-family: 'Poppins', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    ::selection {
+      background: rgba(217, 119, 87, 0.25);
+      color: #D97757;
+    }
+    .panel {
+      background-color: #1E1E1C;
+      border: 1px solid #2C2C28;
+    }
+    .panel-hover:hover {
+      background-color: #242421;
+      border-color: #383833;
+      transition: background-color 150ms ease, border-color 150ms ease;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-accent/20">
+
+  <!-- HEADER -->
+  <header class="border-b border-border bg-bg/95 sticky top-0 z-40 px-6 sm:px-12 py-3.5 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="index.html" class="text-base font-semibold tracking-tight text-textPrimary hover:text-accent transition-colors">Forge</a>
+      <span class="text-[11px] font-mono uppercase tracking-wider px-2 py-0.5 rounded bg-surface border border-border text-textMuted">
+        How We Do It
+      </span>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="hidden md:flex items-center gap-7 text-xs text-textMuted font-medium">
+      <a href="index.html" class="hover:text-textPrimary transition-colors">Overview</a>
+      <a href="what-we-do.html" class="hover:text-textPrimary transition-colors">What We Do</a>
+      <a href="how-we-do-it.html" class="text-textPrimary font-semibold">How We Do It</a>
+      <a href="download.html" class="hover:text-textPrimary transition-colors">Download Hub</a>
+      <a href="about.html" class="hover:text-textPrimary transition-colors">Owner & Philosophy</a>
+      <a href="https://www.linkedin.com/in/subhash-maurya-656905243/" target="_blank" rel="noreferrer" class="hover:text-accent transition-colors flex items-center gap-1 font-mono text-[11px]">
+        LinkedIn ↗
+      </a>
+    </nav>
+
+    <!-- Header Action -->
+    <a href="download.html" class="px-3.5 py-1.5 bg-accent hover:opacity-90 text-textPrimary font-medium text-xs rounded transition-opacity flex items-center gap-1.5">
+      <span>Download</span>
+    </a>
+  </header>
+
+  <!-- MAIN BODY -->
+  <main class="flex-1 max-w-5xl mx-auto w-full px-6 sm:px-12 py-12 flex flex-col gap-16">
+
+    <!-- PAGE HERO -->
+    <section class="flex flex-col gap-3 max-w-3xl">
+      <span class="text-xs font-mono uppercase text-accent tracking-wider font-semibold">Engineering Discipline</span>
+      <h1 class="text-3xl sm:text-4xl font-semibold tracking-tight text-textPrimary leading-tight">
+        How We Do It: Multi-Brain Debate, Strict Contracts & Measurable Gates.
+      </h1>
+      <p class="text-sm text-textMuted leading-relaxed max-w-2xl font-normal">
+        We replace conversational randomness with organizational engineering hierarchy. Every change is debated by specialized brains, contracted via formal task briefs, and verified with real Git diffs.
+      </p>
+    </section>
+
+    <!-- 1. MULTI-BRAIN LOCAL DEBATE -->
+    <section class="flex flex-col gap-5">
+      <div class="flex items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-accent"></span>
+        <h2 class="text-xl font-semibold text-textPrimary tracking-tight">
+          1. The Multi-Brain Adversarial Local Debate Engine
+        </h2>
+      </div>
+
+      <div class="panel rounded-lg p-6 flex flex-col gap-4">
+        <p class="text-xs sm:text-sm text-textMuted leading-relaxed">
+          Before any code is modified, specialized local sub-brains engage in structured debate to protect performance and eliminate bottlenecks:
+        </p>
+
+        <div class="flex flex-col gap-3 divide-y divide-border/60 font-mono text-xs">
+          <div class="pt-2 first:pt-0 flex flex-col gap-1">
+            <div class="flex items-center gap-2">
+              <span class="text-accentBlue font-bold">[Architecture Lead]</span>
+              <span class="text-textMuted/60 text-[10px]">Tier 0 Proposal</span>
+            </div>
+            <p class="text-textMuted text-[11px] leading-relaxed">
+              "For day-one local execution, a single-node server with SQLite WAL mode + local directory storage keeps RAM &lt;80MB with zero cloud lock-in. Scale path documented to Tier 3."
+            </p>
+          </div>
+
+          <div class="pt-2 flex flex-col gap-1">
+            <div class="flex items-center gap-2">
+              <span class="text-accentGreen font-bold">[Security Auditor]</span>
+              <span class="text-textMuted/60 text-[10px]">Adversarial Challenge</span>
+            </div>
+            <p class="text-textMuted text-[11px] leading-relaxed">
+              "Local storage upload routes must enforce magic-byte MIME validation, path traversal defense, and disk quotas to prevent accidental drive exhaustion."
+            </p>
+          </div>
+
+          <div class="pt-2 flex flex-col gap-1">
+            <div class="flex items-center gap-2">
+              <span class="text-amber-400 font-bold">[Performance Engineer]</span>
+              <span class="text-textMuted/60 text-[10px]">Latency Challenge</span>
+            </div>
+            <p class="text-textMuted text-[11px] leading-relaxed">
+              "Local read target p95 &lt; 50ms verified. Recommend optimistic client updates and chunked streaming to prevent UI thread blockage during media playback."
+            </p>
+          </div>
+
+          <div class="pt-2 flex flex-col gap-1">
+            <div class="flex items-center gap-2">
+              <span class="text-accent font-bold">[Product Manager]</span>
+              <span class="text-textMuted/60 text-[10px]">Consensus Synthesis</span>
+            </div>
+            <p class="text-textMuted text-[11px] leading-relaxed">
+              "Consensus achieved. Quotas, MIME validation, and optimistic UI merged into docs/SYSTEM_DESIGN.md. Preparing Task Briefs for human approval."
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. CONTRACT-DRIVEN PROTOCOL -->
+    <section class="flex flex-col gap-5">
+      <div class="flex items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-accentBlue"></span>
+        <h2 class="text-xl font-semibold text-textPrimary tracking-tight">
+          2. The Contract-Driven Protocol (Task Brief $\rightarrow$ Task Report)
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono">
+        <!-- Task Brief -->
+        <div class="panel p-5 rounded-lg flex flex-col gap-2">
+          <span class="text-accent font-bold uppercase tracking-wider text-[11px]">Task Brief (Lead $\rightarrow$ Sub-agent)</span>
+          <p class="text-textMuted text-[11px] font-sans">Strictly bounds work scope to prevent hallucinations and uncontrolled code churn:</p>
+          <div class="p-3 bg-bg rounded border border-border text-[10px] text-textMuted space-y-1">
+            <div><strong>ID:</strong> [T-001]</div>
+            <div><strong>Scope:</strong> Exact functions/files to modify.</div>
+            <div><strong>Out of Scope:</strong> Unrelated refactoring forbidden.</div>
+            <div><strong>Skills Assigned:</strong> [lean-code, security-audit]</div>
+            <div><strong>Gates Required:</strong> [security, tests, docs]</div>
+          </div>
+        </div>
+
+        <!-- Task Report -->
+        <div class="panel p-5 rounded-lg flex flex-col gap-2">
+          <span class="text-accentGreen font-bold uppercase tracking-wider text-[11px]">Task Report (Sub-agent $\rightarrow$ Lead)</span>
+          <p class="text-textMuted text-[11px] font-sans">Empirical proof of work before a task can ever be marked complete:</p>
+          <div class="p-3 bg-bg rounded border border-border text-[10px] text-textMuted space-y-1">
+            <div><strong>Touched Files:</strong> Exact path and line ranges.</div>
+            <div><strong>Diff Excerpt:</strong> Real before/after lines.</div>
+            <div><strong>Verification:</strong> Real test runner output pasted.</div>
+            <div><strong>Gate Status:</strong> 0 secrets detected.</div>
+            <div><strong>Undo:</strong> Commit hash or revert command.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. TIERS 0 TO 3 SCALABILITY -->
+    <section class="flex flex-col gap-5">
+      <div class="flex items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-accentGreen"></span>
+        <h2 class="text-xl font-semibold text-textPrimary tracking-tight">
+          3. Right-Sized Scalability Architecture (Tiers 0–3)
+        </h2>
+      </div>
+
+      <div class="panel rounded-lg overflow-hidden">
+        <table class="w-full text-left text-xs">
+          <thead class="bg-surfaceActive border-b border-border text-[10px] font-bold uppercase tracking-wider text-textMuted font-mono">
+            <tr>
+              <th class="p-3">Tier</th>
+              <th class="p-3">User Target</th>
+              <th class="p-3">Architecture Stack</th>
+              <th class="p-3">Latency Metric</th>
+              <th class="p-3">Monthly Cost</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-border/40 font-mono text-[11px]">
+            <tr class="bg-accent/5">
+              <td class="p-3 font-bold text-accent">Tier 0 (Local)</td>
+              <td class="p-3">1–10 users</td>
+              <td class="p-3 text-textMuted">Single Node + SQLite WAL + Local Storage</td>
+              <td class="p-3 text-accentGreen">14ms [MEASURED]</td>
+              <td class="p-3 font-bold text-accentGreen">$0.00 / mo [MEASURED]</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-bold text-textPrimary">Tier 1 (Cloud VM)</td>
+              <td class="p-3">100–1,000</td>
+              <td class="p-3 text-textMuted">Single Container + PostgreSQL + Redis</td>
+              <td class="p-3 text-accentGreen">32ms [MEASURED]</td>
+              <td class="p-3 text-textMuted">$24.00 / mo [ESTIMATED]</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-bold text-textPrimary">Tier 2 (Scaled)</td>
+              <td class="p-3">1k–100,000</td>
+              <td class="p-3 text-textMuted">ECS Fargate + RDS Aurora + SQS + Redis Cluster</td>
+              <td class="p-3 text-accentGreen">65ms [MEASURED]</td>
+              <td class="p-3 text-textMuted">$165.00 / mo [ESTIMATED]</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-bold text-textPrimary">Tier 3 (Hyperscale)</td>
+              <td class="p-3">100k–1M+</td>
+              <td class="p-3 text-textMuted">Multi-Region Edge + Kafka + Sharded DB + Hybrid Fanout</td>
+              <td class="p-3 text-accentGreen">80ms [ESTIMATED]</td>
+              <td class="p-3 text-textMuted">$1,850.00 / mo [ESTIMATED]</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 4. MANDATORY QUALITY GATES -->
+    <section class="flex flex-col gap-5">
+      <div class="flex items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-purple-400"></span>
+        <h2 class="text-xl font-semibold text-textPrimary tracking-tight">
+          4. The 6 Mandatory Quality Gates
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+        <div class="panel p-4 rounded-lg">
+          <span class="font-bold text-textPrimary block mb-1">Gate 1: Security & Secrets Scanner</span>
+          <p class="text-textMuted text-[11px]">Scans every file before git commit. Blocks any API keys, credentials, or private keys.</p>
+        </div>
+        <div class="panel p-4 rounded-lg">
+          <span class="font-bold text-textPrimary block mb-1">Gate 2: Unit & Regression Tests</span>
+          <p class="text-textMuted text-[11px]">Validates against recorded baseline tests. Zero regressions allowed.</p>
+        </div>
+        <div class="panel p-4 rounded-lg">
+          <span class="font-bold text-textPrimary block mb-1">Gate 3: Performance Latency Check</span>
+          <p class="text-textMuted text-[11px]">Checks critical paths against the latency budget (read p95 &lt; 50ms [MEASURED]).</p>
+        </div>
+        <div class="panel p-4 rounded-lg">
+          <span class="font-bold text-textPrimary block mb-1">Gate 4: Lean-Code Anti-Bloat</span>
+          <p class="text-textMuted text-[11px]">Rejects hand-rolled utilities where maintained packages already solve the problem cleanly.</p>
+        </div>
+        <div class="panel p-4 rounded-lg">
+          <span class="font-bold text-textPrimary block mb-1">Gate 5: Living Documentation Integrity</span>
+          <p class="text-textMuted text-[11px]">Ensures docs/AI_CHANGELOG.md, README, and SYSTEM_DESIGN are synchronized in the same commit.</p>
+        </div>
+        <div class="panel p-4 rounded-lg">
+          <span class="font-bold text-textPrimary block mb-1">Gate 6: SEO & Generative Engine Optimization</span>
+          <p class="text-textMuted text-[11px]">Generates llms.txt and JSON-LD structured data for AI search engines.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEXT CTA -->
+    <section class="panel rounded-lg p-6 flex items-center justify-between">
+      <div>
+        <h3 class="text-sm font-semibold text-textPrimary">Ready to run Forge locally?</h3>
+        <p class="text-xs text-textMuted mt-0.5">Download the Android APK or Windows desktop build.</p>
+      </div>
+      <a href="download.html" class="px-4 py-2 bg-accent hover:opacity-90 text-textPrimary text-xs font-medium rounded transition-opacity">
+        Go to Download Hub →
+      </a>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-border py-6 px-6 sm:px-12 text-xs text-textMuted flex flex-col sm:flex-row items-center justify-between gap-3 max-w-5xl mx-auto w-full">
+    <div>
+      Forge & Studio Brain • Built by Owner (Subhash Maurya).
+    </div>
+    <div class="flex items-center gap-5 font-mono text-[11px]">
+      <a href="index.html" class="hover:text-textPrimary">Overview</a>
+      <a href="what-we-do.html" class="hover:text-textPrimary">What We Do</a>
+      <a href="download.html" class="hover:text-textPrimary">Downloads</a>
+      <a href="about.html" class="hover:text-textPrimary">Owner</a>
+    </div>
+  </footer>
+
+</body>
+</html>

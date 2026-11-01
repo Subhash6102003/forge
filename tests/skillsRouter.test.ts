@@ -27,4 +27,15 @@ describe('Skills Router Test Suite', () => {
     const r = skillsRouter.route('Decompile the AST and inspect process handles with REA');
     expect(r.some((s) => s.skillId === 'rea')).toBe(true);
   });
+
+  it('correctly routes security audit, vulnerability, and pen-test requests to security-audit skill', () => {
+    const r1 = skillsRouter.route('/security-audit full');
+    expect(r1.some((s) => s.skillId === 'security-audit')).toBe(true);
+
+    const r2 = skillsRouter.route('Perform a vulnerability discovery pen-test on this workspace');
+    expect(r2.some((s) => s.skillId === 'security-audit')).toBe(true);
+
+    const r3 = skillsRouter.route('Initialize the coverage ledger and map trust boundaries');
+    expect(r3.some((s) => s.skillId === 'security-audit')).toBe(true);
+  });
 });

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forge — Autonomous Local AI Desktop IDE</title>
+  <meta name="description" content="Forge: Enterprise-grade AI Desktop IDE with Studio Brain. 100% local model runtime, multi-brain debate, and zero cloud lock-in.">
+
+  <!-- Typography: Poppins and JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Poppins', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            bg: '#141413',
+            surface: '#1E1E1C',
+            surfaceHover: '#292926',
+            surfaceActive: '#33332E',
+            border: '#2C2C28',
+            accent: '#D97757',
+            accentBlue: '#6A9BCC',
+            accentGreen: '#788C5D',
+            textPrimary: '#FAF9F5',
+            textMuted: '#8E8D85'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #141413;
+      color: #FAF9F5;
+      font-family: 'Poppins', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    ::selection {
+      background: rgba(217, 119, 87, 0.25);
+      color: #D97757;
+    }
+    .panel {
+      background-color: #1E1E1C;
+      border: 1px solid #2C2C28;
+    }
+    .panel-hover:hover {
+      background-color: #242421;
+      border-color: #383833;
+      transition: background-color 150ms ease, border-color 150ms ease;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-accent/20">
+
+  <!-- MINIMAL HEADER -->
+  <header class="border-b border-border bg-bg/95 sticky top-0 z-40 px-6 sm:px-12 py-3.5 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="index.html" class="text-base font-semibold tracking-tight text-textPrimary hover:text-accent transition-colors">Forge</a>
+      <span class="text-[11px] font-mono uppercase tracking-wider px-2 py-0.5 rounded bg-surface border border-border text-textMuted">
+        Studio Brain
+      </span>
+    </div>
+
+    <!-- Navigation Across All Pages -->
+    <nav class="hidden md:flex items-center gap-7 text-xs text-textMuted font-medium">
+      <a href="index.html" class="text-textPrimary font-semibold">Overview</a>
+      <a href="what-we-do.html" class="hover:text-textPrimary transition-colors">What We Do</a>
+      <a href="how-we-do-it.html" class="hover:text-textPrimary transition-colors">How We Do It</a>
+      <a href="download.html" class="hover:text-textPrimary transition-colors">Download Hub</a>
+      <a href="about.html" class="hover:text-textPrimary transition-colors">Owner & Philosophy</a>
+      <a href="https://www.linkedin.com/in/subhash-maurya-656905243/" target="_blank" rel="noreferrer" class="hover:text-accent transition-colors flex items-center gap-1 font-mono text-[11px]">
+        LinkedIn ↗
+      </a>
+    </nav>
+
+    <!-- Header Download Button -->
+    <a href="download.html" class="px-3.5 py-1.5 bg-accent hover:opacity-90 text-textPrimary font-medium text-xs rounded transition-opacity flex items-center gap-1.5">
+      <span>Download</span>
+    </a>
+  </header>
+
+  <!-- MAIN BODY -->
+  <main class="flex-1 max-w-5xl mx-auto w-full px-6 sm:px-12 py-14 flex flex-col gap-20">
+
+    <!-- HERO SECTION -->
+    <section class="flex flex-col gap-5 max-w-3xl">
+      <div class="inline-flex items-center gap-2 text-xs font-mono text-accent">
+        <span>●</span>
+        <span>Enterprise AI Desktop IDE</span>
+      </div>
+
+      <h1 class="text-3xl sm:text-5xl font-semibold tracking-tight text-textPrimary leading-tight">
+        An autonomous software studio on your local machine.
+      </h1>
+
+      <p class="text-sm sm:text-base text-textMuted leading-relaxed max-w-2xl font-normal">
+        Forge is a local-first AI code editor with a built-in multi-agent orchestration layer called Studio Brain. It runs 100% on local LLMs with zero cloud dependencies, orchestrating Product Manager, Architecture, Engineering, and Security agents to plan, design, and verify software.
+      </p>
+
+      <!-- Direct Downloads -->
+      <div class="flex flex-wrap items-center gap-3 pt-3">
+        <a href="downloads/Forge-Setup-Windows-x64.exe" download class="px-5 py-2.5 bg-accent hover:opacity-90 text-textPrimary font-medium text-xs rounded transition-opacity flex items-center gap-2">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19.35 10.04c-.69-2.91-3.26-5.04-6.35-5.04-2.24 0-4.22 1.12-5.4 2.84-2.88.33-5.1 2.81-5.1 5.86 0 3.31 2.69 6 6 6h11c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zm-7.35 6.96l-4-4h2.5v-4h3v4h2.5l-4 4z"/></svg>
+          <span>Download for Windows (.exe)</span>
+        </a>
+
+        <a href="download.html" class="px-5 py-2.5 panel panel-hover text-textPrimary font-medium text-xs rounded transition-colors flex items-center gap-2">
+          <span>macOS & Linux Builds</span>
+        </a>
+
+        <a href="download.html" class="text-xs font-mono text-accent hover:underline pl-2 flex items-center gap-1">
+          Hardware Requirements & Hub →
+        </a>
+      </div>
+    </section>
+
+    <!-- 3 MAIN PILLARS PREVIEW -->
+    <section class="flex flex-col gap-6">
+      <div class="flex items-center justify-between">
+        <div class="flex flex-col gap-1">
+          <span class="text-xs font-mono uppercase text-accent tracking-wider font-semibold">Core Architecture</span>
+          <h2 class="text-xl sm:text-2xl font-semibold tracking-tight text-textPrimary">
+            Engineered for Precision & Independence
+          </h2>
+        </div>
+        <a href="what-we-do.html" class="text-xs text-textMuted hover:text-textPrimary font-mono">
+          Full Breakdown →
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- Card 1 -->
+        <a href="what-we-do.html" class="panel panel-hover p-5 rounded-lg flex flex-col justify-between block">
+          <div>
+            <span class="text-xs font-mono text-accent block mb-2 font-medium">01 • Studio Brain</span>
+            <h3 class="text-sm font-semibold text-textPrimary mb-1.5">Hierarchical Multi-Agent</h3>
+            <p class="text-xs text-textMuted leading-relaxed">
+              Product Manager decomposes goals into formal Task Briefs, delegating to Architecture, Engineering, Design, and Security Leads.
+            </p>
+          </div>
+          <span class="text-[11px] font-mono text-accent mt-4 block">Learn more →</span>
+        </a>
+
+        <!-- Card 2 -->
+        <a href="how-we-do-it.html" class="panel panel-hover p-5 rounded-lg flex flex-col justify-between block">
+          <div>
+            <span class="text-xs font-mono text-accentBlue block mb-2 font-medium">02 • Local Multi-Brain</span>
+            <h3 class="text-sm font-semibold text-textPrimary mb-1.5">Adversarial Debate</h3>
+            <p class="text-xs text-textMuted leading-relaxed">
+              Architect and Security sub-brains challenge each other on write bursts, quotas, and memory before code execution.
+            </p>
+          </div>
+          <span class="text-[11px] font-mono text-accentBlue mt-4 block">See debate flow →</span>
+        </a>
+
+        <!-- Card 3 -->
+        <a href="what-we-do.html#skills" class="panel panel-hover p-5 rounded-lg flex flex-col justify-between block">
+          <div>
+            <span class="text-xs font-mono text-accentGreen block mb-2 font-medium">03 • 17-Skill Registry</span>
+            <h3 class="text-sm font-semibold text-textPrimary mb-1.5">Pluggable Capabilities</h3>
+            <p class="text-xs text-textMuted leading-relaxed">
+              Automated security audits, precision UI/UX design systems, micro-interactions & motion engineering, automated testing, and distributed architecture.
+            </p>
+          </div>
+          <span class="text-[11px] font-mono text-accentGreen mt-4 block">View skills →</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS AT A GLANCE -->
+    <section class="panel rounded-lg p-6 sm:p-8 flex flex-col gap-5">
+      <div class="flex flex-col gap-1">
+        <span class="text-xs font-mono uppercase text-accent tracking-wider font-semibold">The Workflow</span>
+        <h3 class="text-lg sm:text-xl font-semibold text-textPrimary">From Concept to Verified Deployment</h3>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 text-xs font-mono">
+        <div class="p-3 bg-bg rounded border border-border">
+          <span class="text-accent font-bold block mb-1">Step 1: Intake</span>
+          <p class="text-textMuted text-[11px]">PM clarifies scope, scale, latency targets, and design direction.</p>
+        </div>
+        <div class="p-3 bg-bg rounded border border-border">
+          <span class="text-accent font-bold block mb-1">Step 2: Debate</span>
+          <p class="text-textMuted text-[11px]">Sub-brains challenge bottlenecks and quotas before code is touched.</p>
+        </div>
+        <div class="p-3 bg-bg rounded border border-border">
+          <span class="text-accent font-bold block mb-1">Step 3: Execution</span>
+          <p class="text-textMuted text-[11px]">Minimal surgical diffs enforcing Lean-Code and zero bloat.</p>
+        </div>
+        <div class="p-3 bg-bg rounded border border-border">
+          <span class="text-accent font-bold block mb-1">Step 4: Gates</span>
+          <p class="text-textMuted text-[11px]">Secret scans, unit tests, latency checks, and Git diff changelog.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- OWNER CALLOUT -->
+    <section class="panel rounded-lg p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div class="flex flex-col gap-1.5">
+        <span class="text-xs font-mono uppercase text-accent tracking-wider font-semibold">Built by Owner</span>
+        <h3 class="text-lg font-semibold text-textPrimary">Subhash Maurya</h3>
+        <p class="text-xs text-textMuted max-w-xl leading-relaxed">
+          Final-year Computer Science student, Android architect, and full-stack systems developer dedicated to building high-character, durable software.
+        </p>
+      </div>
+
+      <div class="flex items-center gap-3 shrink-0">
+        <a href="about.html" class="px-4 py-2 panel panel-hover text-textPrimary text-xs font-medium rounded transition-colors">
+          About Owner
+        </a>
+        <a href="https://www.linkedin.com/in/subhash-maurya-656905243/" target="_blank" rel="noreferrer" class="px-4 py-2 bg-surfaceHover hover:bg-surfaceActive border border-border text-textPrimary text-xs font-medium rounded transition-colors">
+          LinkedIn ↗
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MINIMAL FOOTER -->
+  <footer class="border-t border-border py-6 px-6 sm:px-12 text-xs text-textMuted flex flex-col sm:flex-row items-center justify-between gap-3 max-w-5xl mx-auto w-full">
+    <div>
+      Forge & Studio Brain • Built by Owner (Subhash Maurya).
+    </div>
+    <div class="flex items-center gap-5 font-mono text-[11px]">
+      <a href="what-we-do.html" class="hover:text-textPrimary">What We Do</a>
+      <a href="how-we-do-it.html" class="hover:text-textPrimary">How We Do It</a>
+      <a href="download.html" class="hover:text-textPrimary">Downloads</a>
+      <a href="https://www.linkedin.com/in/subhash-maurya-656905243/" target="_blank" rel="noreferrer" class="hover:text-textPrimary">LinkedIn</a>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -4,3 +4,4 @@ dist-electron
 .DS_Store
 Thumbs.db
 *.log
+skills/.repos/

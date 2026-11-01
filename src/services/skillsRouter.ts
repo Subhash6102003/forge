@@ -60,6 +60,24 @@ export class SkillsRouter {
       });
     }
 
+    // Security audit harness detection
+    if (
+      lower.includes('security-audit') ||
+      lower.includes('/security-audit') ||
+      lower.includes('security audit') ||
+      lower.includes('vulnerability') ||
+      lower.includes('pen-test') ||
+      lower.includes('pentest') ||
+      lower.includes('coverage ledger') ||
+      lower.includes('cve')
+    ) {
+      skills.push({
+        skillId: 'security-audit',
+        confidence: 0.95,
+        systemPromptSnippet: 'Orchestrate Cloudflare 6-phase vulnerability audit harness: reconnaissance (architecture.md & coverage-ledger.json), coverage-led hunting, adversarial candidate validation, findings.json report schema validation, independent source verification, and target-neutral reporting.',
+      });
+    }
+
     // Default to Subhash Developer council if empty
     if (skills.length === 0) {
       skills.push({

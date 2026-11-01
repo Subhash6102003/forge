@@ -1,6 +1,5 @@
 import React from 'react';
-import { GitBranch, RefreshCw, AlertCircle, AlertTriangle, Cpu, Activity, Zap, CheckCircle2 } from 'lucide-react';
-import { StatusPill } from '../ui/StatusPill';
+import { GitBranch, RefreshCw, AlertCircle, AlertTriangle, Cpu, Zap, Play, Square, AlertOctagon } from 'lucide-react';
 
 export interface StatusBarProps {
   branch?: string;
@@ -14,24 +13,26 @@ export interface StatusBarProps {
   language?: string;
   ponytailActive?: boolean;
   ponytailLevel?: 'lite' | 'full' | 'ultra' | 'off';
+  runStatus?: 'running' | 'stopped' | 'failed' | 'idle';
 }
 
 export const StatusBar: React.FC<StatusBarProps> = ({
   branch = 'main',
   problemsCount = 0,
-  warningsCount = 2,
+  warningsCount = 0,
   activeModel = 'Llama 3.1 8B',
   tokensPerSec = 42.3,
   runtimeStatus = 'healthy',
-  lineCol = 'Ln 24, Col 15',
+  lineCol = 'Ln 1, Col 1',
   encoding = 'UTF-8',
   language = 'TSX',
   ponytailActive = true,
   ponytailLevel = 'full',
+  runStatus = 'idle',
 }) => {
   return (
     <div className="h-[28px] w-full bg-statusbar border-t border-border flex items-center justify-between px-3 select-none text-[11px] text-text-muted shrink-0 z-30">
-      {/* Left: Git Branch & Problems */}
+      {/* Left: Git Branch & Problems & Run Process Status */}
       <div className="flex items-center gap-3">
         <button className="flex items-center gap-1 hover:text-text transition-colors">
           <GitBranch className="w-3.5 h-3.5 text-accent" />
@@ -52,6 +53,32 @@ export const StatusBar: React.FC<StatusBarProps> = ({
             <span>{warningsCount}</span>
           </button>
         </div>
+
+        {/* Real Process Status Pill (Vulnerability 6) */}
+        {runStatus && runStatus !== 'idle' && (
+          <div className="flex items-center gap-1.5 px-1.5 py-0.5 rounded text-[10px] font-mono font-bold bg-surface border border-border">
+            <span
+              className={`w-1.5 h-1.5 rounded-full ${
+                runStatus === 'running'
+                  ? 'bg-emerald-500 animate-pulse'
+                  : runStatus === 'failed'
+                  ? 'bg-accent-red'
+                  : 'bg-text-muted'
+              }`}
+            />
+            <span
+              className={
+                runStatus === 'running'
+                  ? 'text-emerald-400'
+                  : runStatus === 'failed'
+                  ? 'text-rose-400'
+                  : 'text-text-muted'
+              }
+            >
+              {runStatus.toUpperCase()}
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Center: Model, Speed, Health */}
@@ -67,8 +94,30 @@ export const StatusBar: React.FC<StatusBarProps> = ({
         </div>
 
         <div className="flex items-center gap-1.5">
-          <span className="w-2 h-2 rounded-full bg-emerald-500" />
-          <span className="text-emerald-500 font-medium">Local Runtime Healthy</span>
+          <span
+            className={`w-2 h-2 rounded-full ${
+              runtimeStatus === 'healthy'
+                ? 'bg-emerald-500'
+                : runtimeStatus === 'warning'
+                ? 'bg-amber-500'
+                : 'bg-accent-red'
+            }`}
+          />
+          <span
+            className={`font-medium ${
+              runtimeStatus === 'healthy'
+                ? 'text-emerald-500'
+                : runtimeStatus === 'warning'
+                ? 'text-amber-500'
+                : 'text-rose-400'
+            }`}
+          >
+            {runtimeStatus === 'healthy'
+              ? 'Local Runtime Healthy'
+              : runtimeStatus === 'warning'
+              ? 'Runtime Warning'
+              : 'Local Runtime Offline'}
+          </span>
         </div>
 
         {ponytailActive && ponytailLevel !== 'off' && (

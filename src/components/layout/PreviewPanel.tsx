@@ -1,27 +1,106 @@
-import React, { useState } from 'react';
-import { Smartphone, Tablet, Monitor, RefreshCw, ExternalLink, Flame, Home, Folder, Bot, Settings, Plus, FolderOpen } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import {
+  Smartphone, Tablet, Monitor, RefreshCw, ExternalLink, Globe,
+  ArrowRight, Play, Square, Loader2
+} from 'lucide-react';
 import { PreviewDevice } from '../../types';
 
 export interface PreviewPanelProps {
   onSelectElement?: (elementInfo: string) => void;
+  initialUrl?: string;
+  detectedServerUrl?: string;
+  onRunProject?: () => void;
+  onStopProject?: () => void;
+  runStatus?: 'running' | 'stopped' | 'failed' | 'idle';
 }
 
-export const PreviewPanel: React.FC<PreviewPanelProps> = ({ onSelectElement }) => {
+export const PreviewPanel: React.FC<PreviewPanelProps> = ({
+  onSelectElement,
+  initialUrl = '',
+  detectedServerUrl = '',
+  onRunProject,
+  onStopProject,
+  runStatus = 'idle',
+}) => {
   const [device, setDevice] = useState<PreviewDevice>('responsive');
+  const [url, setUrl] = useState(initialUrl);
+  const [inputUrl, setInputUrl] = useState(initialUrl);
+  const [reloadKey, setReloadKey] = useState(0);
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const [inspectorActive, setInspectorActive] = useState(true);
+  const [urlError, setUrlError] = useState<string | null>(null);
+  const iframeRef = useRef<HTMLIFrameElement | null>(null);
+
+  // Automatically update preview URL when dev server URL is detected
+  useEffect(() => {
+    if (detectedServerUrl) {
+      setUrl(detectedServerUrl);
+      setInputUrl(detectedServerUrl);
+      setUrlError(null);
+    }
+  }, [detectedServerUrl]);
+
+  // Subscribe to real-time URL detection from Forge Run process
+  useEffect(() => {
+    const forgeAPI = (window as any).forgeAPI;
+    if (forgeAPI?.run?.onUrlDetected) {
+      const cleanup = forgeAPI.run.onUrlDetected((detectedUrl: string) => {
+        setUrl(detectedUrl);
+        setInputUrl(detectedUrl);
+        setUrlError(null);
+      });
+      return cleanup;
+    }
+  }, []);
+
+  const isLocalhostUrl = (target: string): boolean => {
+    return /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?(\/.*)?$/i.test(target.trim());
+  };
 
   const handleRefresh = () => {
     setIsRefreshing(true);
+    setReloadKey((prev) => prev + 1);
     setTimeout(() => setIsRefreshing(false), 400);
+  };
+
+  const handleUrlSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    let target = inputUrl.trim();
+    if (!target) return;
+    if (!target.startsWith('http://') && !target.startsWith('https://')) {
+      target = `http://${target}`;
+    }
+
+    if (!isLocalhostUrl(target)) {
+      setUrlError('Security policy: Only localhost dev server URLs (e.g. http://localhost:5173) are allowed.');
+      return;
+    }
+
+    setUrlError(null);
+    setUrl(target);
+    setInputUrl(target);
+    setReloadKey((prev) => prev + 1);
+  };
+
+  const handleOpenExternal = async () => {
+    if (!url) return;
+    const forgeAPI = (window as any).forgeAPI;
+    if (forgeAPI?.shell?.openExternal) {
+      try {
+        await forgeAPI.shell.openExternal(url);
+      } catch (err: any) {
+        setUrlError(err.message);
+      }
+    } else {
+      window.open(url, '_blank');
+    }
   };
 
   const getContainerStyles = () => {
     switch (device) {
       case 'mobile':
-        return 'w-[375px] h-[667px] border border-border shadow-modal rounded-2xl';
+        return 'w-[375px] h-[667px] border border-border shadow-modal rounded-2xl overflow-hidden';
       case 'tablet':
-        return 'w-[768px] h-[600px] border border-border shadow-modal rounded-xl';
+        return 'w-[768px] h-[600px] border border-border shadow-modal rounded-xl overflow-hidden';
       case 'desktop':
       case 'responsive':
       default:
@@ -32,24 +111,60 @@ export const PreviewPanel: React.FC<PreviewPanelProps> = ({ onSelectElement }) =
   return (
     <div className="flex flex-col h-full w-full bg-surface border-l border-border select-none overflow-hidden">
       {/* Top Controls Bar */}
-      <div className="flex items-center justify-between px-3 py-1.5 border-b border-border bg-titlebar text-xs shrink-0">
-        <div className="flex items-center gap-2">
-          <span className="font-semibold text-text">Preview</span>
-          <span className="text-[10px] text-text-muted bg-surface-active px-1.5 py-0.2 rounded font-mono">
-            localhost:5173
-          </span>
-        </div>
+      <div className="flex items-center justify-between px-3 py-1.5 border-b border-border bg-titlebar text-xs shrink-0 gap-2">
+        {/* Quick Run / Stop Dev Server Button */}
+        {runStatus === 'running' ? (
+          <button
+            onClick={onStopProject}
+            className="flex items-center gap-1 px-2 py-1 rounded bg-accent-red/20 text-rose-300 hover:bg-accent-red/30 border border-accent-red/40 text-[10px] font-bold transition-colors shrink-0"
+            title="Stop Dev Server Process"
+          >
+            <Square className="w-3 h-3 fill-current" />
+            <span>Stop</span>
+          </button>
+        ) : (
+          <button
+            onClick={onRunProject}
+            className="flex items-center gap-1 px-2 py-1 rounded bg-emerald-600/20 text-emerald-400 hover:bg-emerald-600/30 border border-emerald-500/40 text-[10px] font-bold transition-colors shrink-0"
+            title="Run Project Dev Server (npm run dev)"
+          >
+            <Play className="w-3 h-3 fill-current" />
+            <span>Run</span>
+          </button>
+        )}
 
-        <div className="flex items-center gap-1.5">
+        {/* URL Input Form */}
+        <form onSubmit={handleUrlSubmit} className="flex items-center gap-1.5 flex-1 min-w-0">
+          <Globe className="w-3.5 h-3.5 text-accent shrink-0" />
+          <input
+            type="text"
+            value={inputUrl}
+            onChange={(e) => {
+              setInputUrl(e.target.value);
+              setUrlError(null);
+            }}
+            placeholder={runStatus === 'running' ? 'Waiting for dev server URL…' : 'Dev server idle (click Run)'}
+            className="flex-1 bg-input-bg text-text text-[11px] font-mono px-2 py-0.5 rounded border border-border focus:outline-none focus:border-accent min-w-0 placeholder:text-text-muted/50"
+          />
+          <button
+            type="submit"
+            className="p-1 text-text-muted hover:text-text rounded transition-colors shrink-0"
+            title="Navigate (Localhost only)"
+          >
+            <ArrowRight className="w-3 h-3" />
+          </button>
+        </form>
+
+        <div className="flex items-center gap-1.5 shrink-0">
           {/* Responsive device switches */}
           <div className="flex items-center bg-surface border border-border rounded p-0.5">
             <button
               onClick={() => setDevice('responsive')}
-              className={`px-1.5 py-0.5 rounded text-[11px] font-medium transition-colors ${
+              className={`px-1.5 py-0.5 rounded text-[10px] font-medium transition-colors ${
                 device === 'responsive' ? 'bg-accent/15 text-accent font-bold' : 'text-text-muted hover:text-text'
               }`}
             >
-              Responsive
+              Auto
             </button>
             <button
               onClick={() => setDevice('mobile')}
@@ -82,134 +197,89 @@ export const PreviewPanel: React.FC<PreviewPanelProps> = ({ onSelectElement }) =
 
           <button
             onClick={handleRefresh}
-            className="p-1 text-text-muted hover:text-text hover:bg-surface-hover rounded transition-colors"
+            disabled={!url}
+            className="p-1 text-text-muted hover:text-text hover:bg-surface-hover rounded transition-colors disabled:opacity-40"
             title="Reload Preview"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${isRefreshing ? 'animate-spin' : ''}`} />
           </button>
 
           <button
-            onClick={() => window.open('http://localhost:5173', '_blank')}
-            className="flex items-center gap-1 px-2 py-1 text-[11px] font-medium text-text-muted hover:text-text hover:bg-surface-hover rounded border border-border transition-colors"
+            onClick={handleOpenExternal}
+            disabled={!url}
+            className="flex items-center gap-1 px-1.5 py-1 text-[10px] font-medium text-text-muted hover:text-text hover:bg-surface-hover rounded border border-border transition-colors disabled:opacity-40"
+            title="Open in default OS browser"
           >
             <ExternalLink className="w-3 h-3" />
-            <span>Open in Browser</span>
+            <span className="hidden sm:inline">Browser</span>
           </button>
         </div>
       </div>
 
+      {urlError && (
+        <div className="px-3 py-1 bg-accent-red/10 border-b border-accent-red/30 text-[10px] text-rose-400">
+          {urlError}
+        </div>
+      )}
+
       {/* Embedded Live Preview Canvas Area */}
-      <div className="flex-1 bg-bg/40 p-4 overflow-auto flex items-center justify-center">
-        <div className={`bg-surface overflow-hidden flex flex-col transition-all duration-normal ${getContainerStyles()}`}>
-          {/* Simulated App Header matching the user screenshot */}
-          <header className="flex h-12 items-center justify-between px-4 border-b border-border shrink-0 bg-surface">
-            <div className="flex items-center gap-2 font-bold text-sm text-text">
-              <div className="w-5 h-5 rounded bg-accent/20 flex items-center justify-center text-accent">
-                <Flame className="w-3.5 h-3.5 fill-current" />
+      <div className="flex-1 bg-bg/40 p-2 overflow-auto flex items-center justify-center relative">
+        <div className={`bg-white transition-all duration-normal flex flex-col ${getContainerStyles()}`}>
+          {url ? (
+            <iframe
+              key={reloadKey}
+              ref={iframeRef}
+              src={url}
+              title="Live Application Preview"
+              className="w-full h-full border-0 bg-white"
+              sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals"
+            />
+          ) : (
+            <div className="flex flex-col items-center justify-center h-full text-center p-6 text-text-muted bg-surface select-none">
+              <Globe className="w-10 h-10 mb-3 opacity-30 text-accent" />
+              <div className="font-semibold text-xs text-text mb-1">
+                {runStatus === 'running'
+                  ? 'Dev Server Starting…'
+                  : runStatus === 'failed'
+                  ? 'Dev Server Setup'
+                  : 'Live Preview Ready'}
               </div>
-              <span>Forge</span>
-            </div>
-            <div className="flex items-center gap-3">
-              <div className="relative">
-                <input
-                  type="text"
-                  placeholder="Search files, components, or commands..."
-                  className="w-56 bg-input-bg text-xs px-2.5 py-1 rounded border border-border focus:outline-none"
-                />
-              </div>
-              <div className="w-7 h-7 rounded-full bg-surface-active text-text-muted flex items-center justify-center text-xs">
-                👤
-              </div>
-            </div>
-          </header>
-
-          {/* App Body */}
-          <div className="flex flex-1 overflow-hidden">
-            {/* App Sidebar */}
-            <div className="w-40 border-r border-border p-2 flex flex-col gap-1 text-xs text-text-muted shrink-0">
-              <div className="flex items-center gap-2 px-2 py-1.5 rounded bg-surface-active text-text font-medium cursor-pointer">
-                <Home className="w-3.5 h-3.5" />
-                <span>Home</span>
-              </div>
-              <div className="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-surface-hover text-text-muted cursor-pointer">
-                <Folder className="w-3.5 h-3.5" />
-                <span>Projects</span>
-              </div>
-              <div className="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-surface-hover text-text-muted cursor-pointer">
-                <Bot className="w-3.5 h-3.5" />
-                <span>AI Assistant</span>
-              </div>
-              <div className="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-surface-hover text-text-muted cursor-pointer">
-                <Settings className="w-3.5 h-3.5" />
-                <span>Settings</span>
-              </div>
-            </div>
-
-            {/* App Main Hero Content */}
-            <div className="flex-1 p-6 overflow-y-auto flex flex-col items-center justify-center text-center">
-              <div
-                onClick={() => onSelectElement?.('Header Hero Title: Build something amazing')}
-                className="hover:ring-2 hover:ring-accent/40 rounded p-2 transition-all cursor-pointer"
-              >
-                <h2 className="text-xl font-bold text-text mb-1 tracking-tight font-sans">
-                  Build something amazing
-                </h2>
-                <p className="text-xs text-text-muted max-w-sm mb-4 leading-relaxed">
-                  Your local AI-powered development environment. Generate code, build UIs, create visuals — all in one place.
-                </p>
-              </div>
-
-              <div className="flex items-center gap-3 mb-6">
-                <button
-                  onClick={() => onSelectElement?.('Button: Start a new project')}
-                  className="px-4 py-1.5 bg-accent text-white rounded text-xs font-semibold hover:opacity-90 transition-opacity shadow-subtle"
-                >
-                  Start a new project
-                </button>
-                <button
-                  onClick={() => onSelectElement?.('Button: Open folder')}
-                  className="px-4 py-1.5 bg-surface text-text border border-border rounded text-xs font-medium hover:bg-surface-hover transition-colors"
-                >
-                  Open folder
-                </button>
-              </div>
-
-              {/* Recent Projects List */}
-              <div className="w-full max-w-md text-left">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs font-bold text-text">Recent Projects</span>
-                  <span className="text-[10px] text-accent hover:underline cursor-pointer">View all →</span>
+              <p className="text-[11px] max-w-xs mb-4 text-text-muted">
+                {runStatus === 'running'
+                  ? 'Your project is starting. The preview will automatically connect as soon as the port is ready.'
+                  : runStatus === 'failed'
+                  ? 'Unable to auto-detect dev script. You can start the built-in static dev server or enter your localhost port above.'
+                  : 'Start your project development server to interact with the live preview directly here.'}
+              </p>
+              {runStatus === 'running' ? (
+                <div className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-surface-active border border-border text-xs text-text">
+                  <Loader2 className="w-3.5 h-3.5 animate-spin text-accent" />
+                  <span>Listening for localhost port…</span>
                 </div>
-                <div className="flex flex-col gap-1.5">
-                  <div className="p-2 rounded border border-border bg-surface hover:border-accent/40 transition-colors flex items-center justify-between cursor-pointer">
-                    <div className="flex items-center gap-2">
-                      <div className="w-6 h-6 rounded bg-accent-blue/15 text-accent-blue flex items-center justify-center font-bold text-xs">
-                        AI
-                      </div>
-                      <div>
-                        <div className="text-xs font-semibold text-text">ai-web-app</div>
-                        <div className="text-[10px] text-text-muted font-mono">~/projects/ai-web-app</div>
-                      </div>
-                    </div>
-                    <span className="text-[10px] text-text-muted">2h ago</span>
-                  </div>
-
-                  <div className="p-2 rounded border border-border bg-surface hover:border-accent/40 transition-colors flex items-center justify-between cursor-pointer">
-                    <div className="flex items-center gap-2">
-                      <div className="w-6 h-6 rounded bg-accent/15 text-accent flex items-center justify-center font-bold text-xs">
-                        P
-                      </div>
-                      <div>
-                        <div className="text-xs font-semibold text-text">portfolio-site</div>
-                        <div className="text-[10px] text-text-muted font-mono">~/projects/portfolio-site</div>
-                      </div>
-                    </div>
-                    <span className="text-[10px] text-text-muted">5h ago</span>
-                  </div>
+              ) : (
+                <div className="flex flex-col gap-2 w-full max-w-xs">
+                  <button
+                    onClick={onRunProject}
+                    className="flex items-center justify-center gap-2 px-3.5 py-1.5 rounded-md bg-accent text-white font-semibold text-xs hover:opacity-90 shadow-xs transition-opacity cursor-pointer"
+                  >
+                    <Play className="w-3.5 h-3.5 fill-current" />
+                    <span>Start Dev Server (Run)</span>
+                  </button>
+                  <button
+                    onClick={() => {
+                      setUrl('http://localhost:5173');
+                      setInputUrl('http://localhost:5173');
+                      setUrlError(null);
+                    }}
+                    className="flex items-center justify-center gap-1.5 px-3 py-1 rounded text-xs bg-surface-active hover:bg-surface-hover text-text border border-border transition-colors cursor-pointer"
+                  >
+                    <Globe className="w-3 h-3 text-accent" />
+                    <span>Connect http://localhost:5173</span>
+                  </button>
                 </div>
-              </div>
+              )}
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>

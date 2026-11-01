@@ -7,8 +7,12 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "build:electron": "tsc -p tsconfig.electron.json",
+    "build:electron": "tsc -p tsconfig.electron.json && node -e \"import('fs').then(f => { f.writeFileSync('dist-electron/package.json', JSON.stringify({type:'commonjs'})); f.copyFileSync('electron/voiceDictation.ps1', 'dist-electron/voiceDictation.ps1'); })\"",
+    "build:all": "npm run build && npm run build:electron",
+    "electron:dev": "npm run build && npm run build:electron && electron .",
     "test": "vitest run",
+    "test:skills": "node --test skills/security-audit/validate-findings.test.cjs skills/security-audit/validate-coverage-ledger.test.cjs",
+    "test:all": "npm test && npm run test:skills",
     "start": "electron ."
   },
   "dependencies": {
@@ -16,6 +20,8 @@
     "@xterm/addon-fit": "^0.10.0",
     "@xterm/xterm": "^5.5.0",
     "lucide-react": "^1.16.0",
+    "monaco-editor": "^0.52.0",
+    "node-pty": "^1.1.0",
     "p5": "^1.11.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"

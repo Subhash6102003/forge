@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forge — Owner & Engineering Philosophy</title>
+  <meta name="description" content="Subhash Maurya — Owner of Forge & Studio Brain. Final-year Computer Science student, Android architect, and distributed systems developer.">
+
+  <!-- Typography: Poppins and JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Poppins', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            bg: '#141413',
+            surface: '#1E1E1C',
+            surfaceHover: '#292926',
+            surfaceActive: '#33332E',
+            border: '#2C2C28',
+            accent: '#D97757',
+            accentBlue: '#6A9BCC',
+            accentGreen: '#788C5D',
+            textPrimary: '#FAF9F5',
+            textMuted: '#8E8D85'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #141413;
+      color: #FAF9F5;
+      font-family: 'Poppins', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    ::selection {
+      background: rgba(217, 119, 87, 0.25);
+      color: #D97757;
+    }
+    .panel {
+      background-color: #1E1E1C;
+      border: 1px solid #2C2C28;
+    }
+    .panel-hover:hover {
+      background-color: #242421;
+      border-color: #383833;
+      transition: background-color 150ms ease, border-color 150ms ease;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-accent/20">
+
+  <!-- HEADER -->
+  <header class="border-b border-border bg-bg/95 sticky top-0 z-40 px-6 sm:px-12 py-3.5 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="index.html" class="text-base font-semibold tracking-tight text-textPrimary hover:text-accent transition-colors">Forge</a>
+      <span class="text-[11px] font-mono uppercase tracking-wider px-2 py-0.5 rounded bg-surface border border-border text-textMuted">
+        Owner & Philosophy
+      </span>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="hidden md:flex items-center gap-7 text-xs text-textMuted font-medium">
+      <a href="index.html" class="hover:text-textPrimary transition-colors">Overview</a>
+      <a href="what-we-do.html" class="hover:text-textPrimary transition-colors">What We Do</a>
+      <a href="how-we-do-it.html" class="hover:text-textPrimary transition-colors">How We Do It</a>
+      <a href="download.html" class="hover:text-textPrimary transition-colors">Download Hub</a>
+      <a href="about.html" class="text-textPrimary font-semibold">Owner & Philosophy</a>
+      <a href="https://www.linkedin.com/in/subhash-maurya-656905243/" target="_blank" rel="noreferrer" class="hover:text-accent transition-colors flex items-center gap-1 font-mono text-[11px]">
+        LinkedIn ↗
+      </a>
+    </nav>
+
+    <!-- Header Action -->
+    <a href="download.html" class="px-3.5 py-1.5 bg-accent hover:opacity-90 text-textPrimary font-medium text-xs rounded transition-opacity flex items-center gap-1.5">
+      <span>Download</span>
+    </a>
+  </header>
+
+  <!-- MAIN BODY -->
+  <main class="flex-1 max-w-5xl mx-auto w-full px-6 sm:px-12 py-12 flex flex-col gap-16">
+
+    <!-- PAGE HERO -->
+    <section class="flex flex-col gap-4 max-w-3xl">
+      <div class="inline-flex items-center gap-2 text-xs font-mono text-accent">
+        <span>●</span>
+        <span>Built by Owner</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-semibold tracking-tight text-textPrimary leading-tight">
+        Subhash Maurya
+      </h1>
+      <p class="text-sm sm:text-base text-textMuted leading-relaxed font-normal">
+        Final-year Computer Science student, systems architect, and full-stack engineer. Creator of Forge and the Studio Brain multi-agent orchestrator.
+      </p>
+
+      <div class="flex items-center gap-3 pt-2">
+        <a href="https://www.linkedin.com/in/subhash-maurya-656905243/" target="_blank" rel="noreferrer" class="px-4 py-2 bg-accent hover:opacity-90 text-textPrimary text-xs font-medium rounded transition-opacity flex items-center gap-2">
+          <span>Connect on LinkedIn</span>
+          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+        </a>
+        <a href="download.html" class="px-4 py-2 panel panel-hover text-textPrimary text-xs font-medium rounded transition-colors">
+          Download Forge
+        </a>
+      </div>
+    </section>
+
+    <!-- WHAT I DO & WHAT I WANT TO DO (2 COLUMNS) -->
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+      <!-- WHAT I DO -->
+      <div class="panel rounded-lg p-6 sm:p-7 flex flex-col gap-5 border-border">
+        <div class="flex flex-col gap-1">
+          <span class="text-xs font-mono uppercase text-accent tracking-wider font-semibold">Current Focus</span>
+          <h2 class="text-lg font-semibold text-textPrimary">What I Do</h2>
+        </div>
+
+        <div class="flex flex-col gap-4 text-xs leading-relaxed text-textMuted">
+          <div class="p-3 bg-bg rounded border border-border flex flex-col gap-1">
+            <span class="font-semibold text-textPrimary font-sans">01 • High-Performance Systems Architecture</span>
+            <p>
+              Designing scale-ready systems following Tier 0 to Tier 3 growth models: stateless microservices, idempotent APIs, sharded counters, cache-aside strategies, and token bucket rate limiters.
+            </p>
+          </div>
+
+          <div class="p-3 bg-bg rounded border border-border flex flex-col gap-1">
+            <span class="font-semibold text-textPrimary font-sans">02 • Full-Stack Platform Engineering</span>
+            <p>
+              Building cross-platform desktop and web applications with TypeScript, React, Monaco editor cores, and hardened IPC communication layers.
+            </p>
+          </div>
+
+          <div class="p-3 bg-bg rounded border border-border flex flex-col gap-1">
+            <span class="font-semibold text-textPrimary font-sans">03 • Local-First Autonomous AI</span>
+            <p>
+              Building developer-centric tooling that executes 100% on local hardware via Ollama and llama.cpp. Orchestrating multi-agent adversarial debates and contract-driven verification pipelines.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- WHAT I WANT TO DO -->
+      <div class="panel rounded-lg p-6 sm:p-7 flex flex-col gap-5 border-border">
+        <div class="flex flex-col gap-1">
+          <span class="text-xs font-mono uppercase text-accentBlue tracking-wider font-semibold">Future Trajectory</span>
+          <h2 class="text-lg font-semibold text-textPrimary">What I Want To Do</h2>
+        </div>
+
+        <div class="flex flex-col gap-4 text-xs leading-relaxed text-textMuted">
+          <div class="p-3 bg-bg rounded border border-border flex flex-col gap-1">
+            <span class="font-semibold text-textPrimary font-sans">01 • Sovereign Developer Tooling</span>
+            <p>
+              Push forward software tools where developers own their computing environment and AI brains locally. Eliminating recurring API rent, privacy leakage, and proprietary vendor lock-in.
+            </p>
+          </div>
+
+          <div class="p-3 bg-bg rounded border border-border flex flex-col gap-1">
+            <span class="font-semibold text-textPrimary font-sans">02 • High-Throughput Distributed Infrastructure</span>
+            <p>
+              Engineer resilient distributed storage, log-structured merge trees, and high-concurrency systems capable of handling extreme write bursts (1M+ QPS) with sub-10ms predictable latencies.
+            </p>
+          </div>
+
+          <div class="p-3 bg-bg rounded border border-border flex flex-col gap-1">
+            <span class="font-semibold text-textPrimary font-sans">03 • Deep Systems & Compiler Engineering</span>
+            <p>
+              Bridge low-level systems programming (Rust/C++, NDK, WebAssembly) with autonomous AI coders to create instant verification engines that prove correctness before code is executed.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- CORE ENGINEERING PRINCIPLES -->
+    <section class="panel rounded-lg p-6 sm:p-8 flex flex-col gap-6">
+      <div class="flex flex-col gap-1">
+        <span class="text-xs font-mono uppercase text-accent tracking-wider font-semibold">Guiding Standards</span>
+        <h2 class="text-xl font-semibold tracking-tight text-textPrimary">
+          Core Engineering Principles
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+        <div class="flex flex-col gap-2">
+          <span class="text-xs font-mono text-accent font-semibold">01 • Minimal Diff, Zero Bloat</span>
+          <h3 class="text-xs font-semibold text-textPrimary">YAGNI & Surgical Edits</h3>
+          <p class="text-xs text-textMuted leading-relaxed">
+            Inspired by seasoned engineering discipline (-53% code). Never write hand-rolled utilities for solved problems. Touch only what the brief demands; leave existing code pristine.
+          </p>
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <span class="text-xs font-mono text-accentBlue font-semibold">02 • Contract-Driven Delegation</span>
+          <h3 class="text-xs font-semibold text-textPrimary">Formal Briefs & Reports</h3>
+          <p class="text-xs text-textMuted leading-relaxed">
+            Eliminate conversational hallucination through structured <code class="text-accentBlue font-mono">TASK BRIEF</code> and <code class="text-accentBlue font-mono">TASK REPORT</code> contracts with hard quality gates.
+          </p>
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <span class="text-xs font-mono text-accentGreen font-semibold">03 • Empirical Verification</span>
+          <h3 class="text-xs font-semibold text-textPrimary">Measured vs Estimated</h3>
+          <p class="text-xs text-textMuted leading-relaxed">
+            Never invent metrics or benchmarks. Every latency number is labeled MEASURED with reproduction method, or ESTIMATED with explicit assumptions.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONNECT & CONTACT -->
+    <section class="panel rounded-lg p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div class="flex flex-col gap-1.5">
+        <span class="text-xs font-mono uppercase text-accent tracking-wider font-semibold">Professional Profile</span>
+        <h3 class="text-lg font-semibold text-textPrimary">Get in Touch with Subhash</h3>
+        <p class="text-xs text-textMuted max-w-xl leading-relaxed">
+          Open to collaborative software engineering, high-scale systems architecture, and mobile platform opportunities.
+        </p>
+      </div>
+
+      <div class="flex items-center gap-3 shrink-0">
+        <a href="https://www.linkedin.com/in/subhash-maurya-656905243/" target="_blank" rel="noreferrer" class="px-5 py-2.5 bg-accent hover:opacity-90 text-textPrimary text-xs font-medium rounded transition-opacity flex items-center gap-2">
+          <span>LinkedIn Profile</span>
+          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-border py-6 px-6 sm:px-12 text-xs text-textMuted flex flex-col sm:flex-row items-center justify-between gap-3 max-w-5xl mx-auto w-full">
+    <div>
+      Forge & Studio Brain • Built by Owner (Subhash Maurya).
+    </div>
+    <div class="flex items-center gap-5 font-mono text-[11px]">
+      <a href="index.html" class="hover:text-textPrimary">Overview</a>
+      <a href="what-we-do.html" class="hover:text-textPrimary">What We Do</a>
+      <a href="how-we-do-it.html" class="hover:text-textPrimary">How We Do It</a>
+      <a href="download.html" class="hover:text-textPrimary">Downloads</a>
+      <a href="https://www.linkedin.com/in/subhash-maurya-656905243/" target="_blank" rel="noreferrer" class="hover:text-textPrimary">LinkedIn</a>
+    </div>
+  </footer>
+
+</body>
+</html>
